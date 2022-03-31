@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Chest_Gold.obj-8c4ab8bdbd9a4cc080164bc0fab68fcc.mesh"
+
+[deps]
+
+files=[ "res://.import/Chest_Gold.obj-8c4ab8bdbd9a4cc080164bc0fab68fcc.mesh" ]
+
+source_file="res://resources/models/Chest_Gold.obj"
+dest_files=[ "res://.import/Chest_Gold.obj-8c4ab8bdbd9a4cc080164bc0fab68fcc.mesh", "res://.import/Chest_Gold.obj-8c4ab8bdbd9a4cc080164bc0fab68fcc.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Table_Big.obj-906655085f46394c705f1108e5d5e251.mesh"
+
+[deps]
+
+files=[ "res://.import/Table_Big.obj-906655085f46394c705f1108e5d5e251.mesh" ]
+
+source_file="res://resources/models/Table_Big.obj"
+dest_files=[ "res://.import/Table_Big.obj-906655085f46394c705f1108e5d5e251.mesh", "res://.import/Table_Big.obj-906655085f46394c705f1108e5d5e251.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

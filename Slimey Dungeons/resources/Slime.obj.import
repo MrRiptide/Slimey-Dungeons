@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Slime.obj-8e0f4f6d052e236dafeaf041d4d82955.mesh"
+
+[deps]
+
+files=[ "res://.import/Slime.obj-8e0f4f6d052e236dafeaf041d4d82955.mesh" ]
+
+source_file="res://resources/Slime.obj"
+dest_files=[ "res://.import/Slime.obj-8e0f4f6d052e236dafeaf041d4d82955.mesh", "res://.import/Slime.obj-8e0f4f6d052e236dafeaf041d4d82955.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Arch_bars.obj-7bd7c8391ff21b52d39a27c0aa8f8fee.mesh"
+
+[deps]
+
+files=[ "res://.import/Arch_bars.obj-7bd7c8391ff21b52d39a27c0aa8f8fee.mesh" ]
+
+source_file="res://resources/models/Arch_bars.obj"
+dest_files=[ "res://.import/Arch_bars.obj-7bd7c8391ff21b52d39a27c0aa8f8fee.mesh", "res://.import/Arch_bars.obj-7bd7c8391ff21b52d39a27c0aa8f8fee.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

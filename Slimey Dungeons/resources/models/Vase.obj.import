@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Vase.obj-9c4e5ca154334c792c24ae931b013834.mesh"
+
+[deps]
+
+files=[ "res://.import/Vase.obj-9c4e5ca154334c792c24ae931b013834.mesh" ]
+
+source_file="res://resources/models/Vase.obj"
+dest_files=[ "res://.import/Vase.obj-9c4e5ca154334c792c24ae931b013834.mesh", "res://.import/Vase.obj-9c4e5ca154334c792c24ae931b013834.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

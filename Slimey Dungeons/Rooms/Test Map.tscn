@@ -1,0 +1,82 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Slime.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Slimes.gd" type="Script" id=2]
+[ext_resource path="res://CameraManager.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Props/Pressure Plate.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Props/SlidingDoor.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Dungeon Grid Library.tres" type="MeshLibrary" id=6]
+[ext_resource path="res://Props/Key.tscn" type="PackedScene" id=7]
+
+[node name="Test Map" type="Spatial"]
+
+[node name="World" type="Spatial" parent="."]
+transform = Transform( 20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0 )
+
+[node name="Floor" type="GridMap" parent="World"]
+mesh_library = ExtResource( 6 )
+data = {
+"cells": PoolIntArray( 0, 0, 655360, 1, 0, 655360, 65533, 0, 655360, 65534, 0, 655360, 65535, 0, 655360, 131072, 0, 1048576, 131073, 0, 1048576, 196605, 0, 1048576, 196606, 0, 1048576, 196607, 0, 1048576, 0, 1, 655360, 1, 1, 655360, 65533, 1, 655360, 65534, 1, 655360, 65535, 1, 655360, 131072, 1, 1048576, 131073, 1, 1048576, 196605, 1, 1048576, 196606, 1, 1048576, 196607, 1, 1048576, 0, 2, 655360, 1, 2, 655360, 65533, 2, 655360, 65534, 2, 655360, 65535, 2, 655360, 131072, 2, 1048576, 131073, 2, 1048576, 196605, 2, 1048576, 196606, 2, 1048576, 196607, 2, 1048576, 0, 65534, 655360, 1, 65534, 655360, 65533, 65534, 655360, 65534, 65534, 655360, 65535, 65534, 655360, 131072, 65534, 1048576, 131073, 65534, 1048576, 196605, 65534, 1048576, 196606, 65534, 1048576, 196607, 65534, 1048576, 0, 65535, 655360, 1, 65535, 655360, 65533, 65535, 655360, 65534, 65535, 655360, 65535, 65535, 655360, 131072, 65535, 1048576, 131073, 65535, 1048576, 196605, 65535, 1048576, 196606, 65535, 1048576, 196607, 65535, 1048576 )
+}
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, 2, 0 )
+}
+
+[node name="Walls" type="GridMap" parent="World"]
+mesh_library = ExtResource( 6 )
+data = {
+"cells": PoolIntArray( 65538, 0, 1179651, 131068, 0, 1310723, 131074, 0, 1179651, 196604, 0, 1310723, 65538, 1, 1179651, 131068, 1, 1310723, 131074, 1, 1179651, 196604, 1, 1310723, 65536, 2, 131075, 65537, 2, 131075, 65538, 2, 1179651, 131068, 2, 1310723, 131069, 2, 131075, 131070, 2, 131075, 131071, 2, 131075, 131074, 2, 1179651, 196604, 2, 1310723, 131072, 3, 524291, 131073, 3, 524291, 196605, 3, 524291, 196606, 3, 524291, 196607, 3, 524291, 131072, 65533, 131075, 131073, 65533, 131075, 196605, 65533, 131075, 196606, 65533, 131075, 196607, 65533, 131075, 65536, 65534, 524291, 65537, 65534, 524291, 65538, 65534, 1179651, 131068, 65534, 1310723, 131069, 65534, 524291, 131070, 65534, 524291, 131071, 65534, 524291, 131074, 65534, 1179651, 196604, 65534, 1310723, 65538, 65535, 1179651, 131068, 65535, 1310723, 131074, 65535, 1179651, 196604, 65535, 1310723 )
+}
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, 0, 0 )
+}
+
+[node name="Columns" type="GridMap" parent="World"]
+mesh_library = ExtResource( 6 )
+data = {
+"cells": PoolIntArray( 131073, 2, 1310724, 196604, 2, 1310724, 131073, 65533, 1310724, 196604, 65533, 1310724 )
+}
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, 2, 0 )
+}
+
+[node name="Wall Covers" type="GridMap" parent="World"]
+mesh_library = ExtResource( 6 )
+data = {
+"cells": PoolIntArray( 2, 0, 1441797, 65532, 0, 1048581, 2, 1, 1441797, 65532, 1, 1048581, 2, 2, 1441797, 65532, 2, 1048581, 65533, 2, 5, 65534, 2, 5, 0, 3, 655365, 1, 3, 655365, 65533, 3, 655365, 65534, 3, 655365, 65535, 3, 655365, 0, 65533, 5, 1, 65533, 5, 65533, 65533, 5, 65534, 65533, 5, 65535, 65533, 5, 2, 65534, 1441797, 65532, 65534, 1048581, 2, 65535, 1441797, 65532, 65535, 1048581 )
+}
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, 0, 0 )
+}
+
+[node name="Camera Manager" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 70.8365, 0 )
+
+[node name="Slimes" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.41385, 0 )
+script = ExtResource( 2 )
+
+[node name="Initial Slime" parent="Slimes" instance=ExtResource( 1 )]
+transform = Transform( 1, -0.000179223, 4.9558e-05, 0.000179195, 1, 0.00056353, -4.96605e-05, -0.000563521, 1, 0, 68.4227, 0 )
+
+[node name="Props" type="Spatial" parent="."]
+
+[node name="Pressure Plate" parent="Props" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.61507, 59.3379 )
+connected_to = NodePath("../VSlidingDoor")
+
+[node name="VSlidingDoor" parent="Props" instance=ExtResource( 5 )]
+transform = Transform( 10, 0, 0, 0, 20, 0, 0, 0, 1, 0, 10, 78.214 )
+
+[node name="Key" parent="Props" instance=ExtResource( 7 )]
+transform = Transform( 5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 36.7694, 97.7766 )
+
+[node name="OmniLight" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 22.5457, 0 )
+light_color = Color( 1, 0.423529, 0, 1 )
+light_energy = 16.0
+omni_range = 4096.0

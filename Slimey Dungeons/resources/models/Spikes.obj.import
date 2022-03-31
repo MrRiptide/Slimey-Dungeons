@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Spikes.obj-02813cdd7a29b1ba2707c63c1852a59b.mesh"
+
+[deps]
+
+files=[ "res://.import/Spikes.obj-02813cdd7a29b1ba2707c63c1852a59b.mesh" ]
+
+source_file="res://resources/models/Spikes.obj"
+dest_files=[ "res://.import/Spikes.obj-02813cdd7a29b1ba2707c63c1852a59b.mesh", "res://.import/Spikes.obj-02813cdd7a29b1ba2707c63c1852a59b.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

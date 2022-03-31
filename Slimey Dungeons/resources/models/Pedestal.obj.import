@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Pedestal.obj-1f20c6bbe597df124a8f336f6e2cd665.mesh"
+
+[deps]
+
+files=[ "res://.import/Pedestal.obj-1f20c6bbe597df124a8f336f6e2cd665.mesh" ]
+
+source_file="res://resources/models/Pedestal.obj"
+dest_files=[ "res://.import/Pedestal.obj-1f20c6bbe597df124a8f336f6e2cd665.mesh", "res://.import/Pedestal.obj-1f20c6bbe597df124a8f336f6e2cd665.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286
