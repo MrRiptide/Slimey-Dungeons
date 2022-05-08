@@ -15,9 +15,9 @@ class InventoryItem:
 	var scene_source : String
 	var id : String
 	
-	func _init(scene_source, id):
-		self.scene_source = scene_source
-		self.id = id
+	func _init(_scene_source, _id):
+		self.scene_source = _scene_source
+		self.id = _id
 
 
 # Called when the node enters the scene tree for the first time.
@@ -26,12 +26,22 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	focus_slime(selected_slime)
 	selected_slime.get_node("CollisionShape").disabled = false
+	if Global.performance_mode:
+		for child in get_node("../Weak Collision World").get_children():
+			if child is GridMap:
+				child.collision_layer = 32768+1
+				child.collision_mask = 32768+1
+		for child in get_node("../World").get_children():
+			if child is GridMap:
+				child.collision_layer = 0
+				child.collision_mask = 0
 
 
 func focus_slime(slime):
 	slime.collision_layer = pow(2, 0) + pow(2, 15)
 	selected_slime = slime
 	slime.collision_layer = pow(2, 0)
+	slime.get_node("Listener").make_current()
 	camera_manager.scale.z = slime.size
 	camera_manager.rotation_degrees.y = selected_slime.rotation_degrees.y
 	camera_manager.get_node("HUD/Size Label").text = "Size: " + str(slime.size)
@@ -46,7 +56,7 @@ func add_to_inventory(inventory_item):
 	item.name = inventory_item.id
 	inventory_display.add_child(item_container)
 	item_container.get_node("Viewport").add_child(item)
-	item.set_layer_mask(512)
+	item.get_node("Key").set_layer_mask(512)
 	item_container.visible = true
 
 
@@ -78,13 +88,11 @@ func hide_actionbar(text):
 
 
 func level_complete():
-	var level_end_display = get_node("../Camera Manager/HUD/Level End Display")
-	if get_node("../Camera Manager").current_level == 15:
-		level_end_display.get_node("VBoxContainer/Next Level Container").visible = false
-	level_end_display.visible = true
-	level_end_display.get_node("VBoxContainer/Label Container/Label").text = "Level Complete!"
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	get_node("../Camera Manager").level_complete()
 
+
+func level_failed():
+	get_node("../Camera Manager").level_failed()
 
 func get_focused():
 	return selected_slime
@@ -95,10 +103,11 @@ func get_key():
 
 
 func _unhandled_input(event : InputEvent) -> void:
+	if not is_instance_valid(selected_slime):
+		return
 	if Input.is_action_just_pressed("gameplay_switch"):
 		focus_slime(get_child(wrapi(selected_slime.get_index() + 1, 0, get_child_count())))
 	if Input.is_action_just_pressed("gameplay_switch_inverse"):
-		print(posmod(selected_slime.get_index() - 2, get_child_count()))
 		focus_slime(get_child(posmod(selected_slime.get_index() - 2, get_child_count())))
 		
 	if Input.is_action_just_released("control_lookaround"):

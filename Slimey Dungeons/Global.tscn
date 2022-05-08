@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://globals.gd" type="Script" id=1]
+[ext_resource path="res://resources/sounds/A tricky puzzle.wav" type="AudioStream" id=2]
+
+[node name="Global" type="Node"]
+script = ExtResource( 1 )
+
+[node name="game music" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
+stream = ExtResource( 2 )
+autoplay = true
+bus = "Music"

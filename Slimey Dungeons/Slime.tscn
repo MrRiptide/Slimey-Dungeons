@@ -1,15 +1,17 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Slime.gd" type="Script" id=1]
 [ext_resource path="res://SlimeModel.tscn" type="PackedScene" id=2]
+[ext_resource path="res://resources/sounds/slime split.wav" type="AudioStream" id=3]
+[ext_resource path="res://resources/sounds/slime merge.wav" type="AudioStream" id=4]
+[ext_resource path="res://resources/sounds/slime jump.wav" type="AudioStream" id=5]
 
 [sub_resource type="ConvexPolygonShape" id=5]
 points = PoolVector3Array( -0.799274, -0.860707, -0.983775, 0.79923, 0.860707, 0.983775, 0.863897, 0.894868, 0.956537, 0.894827, -0.956537, 0.863937, -0.951993, -0.798457, 0.921207, 0.798418, 0.951992, -0.921208, -0.951993, 0.921207, -0.798457, 0.956515, -0.863956, -0.894887, -0.863933, 0.956528, 0.894861, -0.921209, -0.951991, -0.798456, 0.98373, 0.860874, 0.799424, -0.799274, -0.860707, 0.983775, -0.860709, 0.799268, -0.983774, 0.921187, 0.798475, -0.952013, 0.79923, -0.983775, -0.860707, -0.860709, -0.983774, 0.799268, 0.951971, -0.798475, 0.921229, -0.983739, 0.799396, 0.860843, -0.983739, -0.799396, -0.860843, 0.860674, -0.799276, -0.983784, 0.860674, 0.983784, 0.799276, -0.799274, 0.983775, -0.860707, -0.860709, 0.799268, 0.983774, 0.98373, 0.860874, -0.799424, 0.79923, -0.860707, 0.983775, 0.98373, -0.860874, 0.799424, -0.983739, -0.860843, 0.799396, -0.983739, 0.799396, -0.860843, 0.860674, 0.983784, -0.799276, -0.799274, -0.983775, -0.860707, 0.79923, 0.860707, -0.983775, 0.79923, -0.983775, 0.860707, -0.860709, 0.983774, 0.799268, 0.98373, -0.860874, -0.799424, -0.798462, 0.921208, -0.951992, 0.798418, -0.921208, -0.951992, -0.798462, -0.951992, 0.921208, -0.921209, -0.798456, -0.951991, 0.921187, 0.798475, 0.952013, 0.921187, -0.952013, -0.798475, -0.983739, 0.860843, 0.799396, 0.951971, 0.921229, -0.798475, 0.79923, 0.983775, 0.860707, -0.798462, 0.921208, 0.951992, 0.860674, -0.799276, 0.983784, 0.98373, 0.799424, 0.860874, 0.98373, 0.799424, -0.860874, -0.798462, -0.951992, -0.921208, -0.951993, 0.798457, -0.921207, 0.921187, 0.952013, 0.798475, 0.798418, -0.921208, 0.951992, -0.921209, -0.951991, 0.798456, -0.951993, 0.798457, 0.921207, 0.860674, -0.983784, 0.799276, -0.860709, -0.799268, 0.983774, -0.860709, 0.983774, -0.799268, -0.921209, 0.951991, 0.798456, -0.983739, -0.860843, -0.799396, 0.951971, -0.798475, -0.921229, 0.951971, -0.921229, 0.798475, 0.798418, 0.951992, 0.921208, -0.799274, 0.983775, 0.860707, 0.860674, 0.799276, 0.983784, 0.98373, -0.799424, -0.860874 )
 
 [sub_resource type="BoxShape" id=3]
 
-[node name="Slime" type="KinematicBody"]
-collision_layer = 32769
+[node name="Slime" type="KinematicBody" groups=["slime", "weighted"]]
 script = ExtResource( 1 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
@@ -24,3 +26,22 @@ monitorable = false
 
 [node name="CollisionShape" type="CollisionShape" parent="Area"]
 shape = SubResource( 3 )
+
+[node name="OmniLight" type="OmniLight" parent="."]
+light_color = Color( 0.341176, 0.905882, 0.376471, 1 )
+light_energy = 2.0
+omni_range = 10.0
+
+[node name="jump" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+bus = "Sounds"
+
+[node name="merge" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+bus = "Sounds"
+
+[node name="split" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+bus = "Sounds"
+
+[node name="Listener" type="Listener" parent="."]

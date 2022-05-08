@@ -21,28 +21,55 @@ func _ready():
 func resize(new_size):
 	size = new_size
 	self.scale = Vector3(size, size, size)
+	$OmniLight.omni_range = size * 5
 
 
-func init(size, origin, rotation):
+func init(size, origin, rotation, velocity):
 	resize(size)
 	self.rotation = rotation
 	var move_direction = Vector3(1,0,0).rotated(Vector3.UP, rotation.y).normalized()
-	self.global_transform.origin = origin - move_direction*0.9*size
+	self.global_transform.origin = origin
+	#move_and_collide((-1 if move_direction.dot(_velocity) >= 0 else 1)*(move_direction*size*0.5 + 0*move_direction), false, true)
+	move_and_collide((-velocity.normalized()*size*0.5), false, true)
 	$CollisionShape.disabled = false
-	#move_and_slide(Vector3.ZERO, Vector3.UP, true)
+	_velocity = velocity
+
+func vinit(size, origin, rotation, velocity):
+	resize(size)
+	self.rotation = rotation
+	self.global_transform.origin = origin
+	move_and_collide(Vector3(0,size*-0.5,0), false, true)
+	$CollisionShape.disabled = false
+	_velocity = velocity
 
 
 func _physics_process(delta):
 	var is_focused := bool(get_parent().get_focused() == self)
 	if is_focused:
-		if Input.is_action_just_pressed("gameplay_split") and size > 1 and move_and_collide(Vector3(0, size, 0), true, true, true) == null:
+		# horiz split
+		if Input.is_action_just_pressed("gameplay_split") and size > 1 and not Input.is_action_pressed("gameplay_alt_split"):
+			var move_direction = Vector3(1,0,0).rotated(Vector3.UP, rotation.y).normalized()
+			var orig_size = size
+			if true: #move_and_collide(move_direction, true, true, true) == null and move_and_collide(-move_direction, true, true, true) == null:
+				var new_slime = load("Slime.tscn").instance()
+				get_parent().add_child(new_slime)
+				new_slime.init(floor(size/2.0), global_transform.origin, rotation, _velocity)
+				resize(ceil(size/2.0))
+				#self.global_transform.origin = self.global_transform.origin + (1 if move_direction.dot(_velocity) >= 0 else -1)*(move_direction*size*0.5 + 0*move_direction)
+				#move_and_collide((1 if move_direction.dot(_velocity) >= 0 else -1)*(move_direction*size*0.5 + 0*move_direction), false, true)
+				move_and_collide((_velocity.normalized()*size*0.5), false, true)
+				get_parent().focus_slime(self)
+			$split.play()
+		# vert split
+		if Input.is_action_just_pressed("gameplay_alt_split") and size > 1:
 			var new_slime = load("Slime.tscn").instance()
 			get_parent().add_child(new_slime)
-			new_slime.init(floor(size/2.0), global_transform.origin, rotation)
+			new_slime.vinit(floor(size/2.0), global_transform.origin, rotation, _velocity)
 			resize(ceil(size/2.0))
-			var move_direction = Vector3(1,0,0).rotated(Vector3.UP, rotation.y).normalized()
-			self.global_transform.origin = self.global_transform.origin + move_direction*0.9*size
+			#self.global_transform.origin = self.global_transform.origin + (1 if move_direction.dot(_velocity) >= 0 else -1)*(move_direction*size*0.5 + 0*move_direction)
+			move_and_collide(Vector3(0,size*0.5,0), false, true)
 			get_parent().focus_slime(self)
+			$split.play()
 		if Input.is_action_just_pressed("gameplay_merge"):
 			var new_size = 0
 			var new_location = Vector3.ZERO
@@ -52,6 +79,8 @@ func _physics_process(delta):
 					new_size += node.size
 					if node != self:
 						node.get_parent().remove_child(node)
+			if new_size > size:
+				$merge.play()
 			resize(new_size)
 			self.global_transform.origin = new_location / new_size
 			get_parent().focus_slime(self)
@@ -90,8 +119,15 @@ func _physics_process(delta):
 	var is_jumping := is_focused and is_on_floor() and Input.is_action_pressed("movement_jump")
 	
 	if is_jumping:
+		$jump.play()
 		_velocity.y = jump_strength
 		_snap_vector = Vector3.ZERO
 	elif just_landed:
+		#$jump.play()
 		_snap_vector = Vector3.DOWN
 	_velocity = move_and_slide_with_snap(_velocity, _snap_vector, Vector3.UP, false, 100, 0.785398, false)
+	
+	for index in get_slide_count():
+		var collision = get_slide_collision(index)
+		if collision.collider.is_in_group("bodies"):
+			collision.collider.apply_central_impulse(-collision.normal * size * _velocity.length())
